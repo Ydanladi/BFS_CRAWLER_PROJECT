@@ -5,6 +5,7 @@ import graphviz
 from selenium.webdriver.common.by import By
 from graphviz import Digraph
 from collections import deque
+import time
 
 gv=Digraph(engine="neato")
 
@@ -33,17 +34,19 @@ def visting_url(url):
 # print(links)
 # print(depth)
 while len(task)>0:
-    max_depth = 3
+    max_depth = 1
     url=task.popleft()
     depth[url] = 0
    
     if depth[url] < max_depth:
         children_url=visting_url(url)
+        time.sleep(3)
         for child in children_url:
             if not child in links:
                 task.append(child)
                 links.add(child)
                 depth[url] += 1
+                time.sleep(3)
 print(len(links))
 
 
